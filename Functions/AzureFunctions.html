@@ -139,7 +139,8 @@
         </head>
         <body class="vscode-body vscode-light">
             <h1 id="az-204--implement-azure-functions">AZ-204 : Implement Azure Functions</h1>
-<h2 id="introduction">Introduction</h2>
+<h2 id="explore-azure-functions">Explore Azure Functions</h2>
+<h3 id="introduction">Introduction</h3>
 <ul>
 <li>Azure Functions : develop serverless applications</li>
 <li>be able to
@@ -150,7 +151,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="discover-azure-function">Discover Azure Function</h2>
+<h3 id="discover-azure-function">Discover Azure Function</h3>
 <ul>
 <li>Serverless solution</li>
 <li>장점
@@ -168,7 +169,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="compare-azure-functions-and-azure-logic-apps">Compare Azure Functions and Azure Logic Apps</h2>
+<h3 id="compare-azure-functions-and-azure-logic-apps">Compare Azure Functions and Azure Logic Apps</h3>
 <ul>
 <li>공통
 <ul>
@@ -191,7 +192,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="compare-functions-and-webjobs">Compare Functions and WebJobs</h2>
+<h3 id="compare-functions-and-webjobs">Compare Functions and WebJobs</h3>
 <ul>
 <li>차이
 <ul>
@@ -206,7 +207,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="hosting-options">hosting options</h2>
+<h3 id="hosting-options">hosting options</h3>
 <ul>
 <li>Consumption plan
 <ul>
@@ -215,10 +216,94 @@
 <li>pay-as-you-go (유휴상태 비용 없음)</li>
 </ul>
 </li>
-<li>Flex Consumption plan</li>
-<li>Premium plan</li>
-<li>Dedicated plan</li>
+<li>Flex Consumption plan
+<ul>
+<li>incoming events에 따른 automatic scale</li>
 </ul>
+</li>
+<li>Premium plan
+<ul>
+<li>continuously, function apps</li>
+<li>deploy multiple function apps on the same plan with event-driven scaling.</li>
+<li>high number of small executions &amp; high execution bill, but low GB seconds</li>
+<li>require virtual network connectivity</li>
+<li>custom Linux image to run your functions</li>
+</ul>
+</li>
+<li>Dedicated plan
+<ul>
+<li>fully predictable billing or manually sacle istances</li>
+<li>run multiple web apps and function apps on the same plan</li>
+<li>access to larger compute size choices</li>
+<li>full compute isolation, secure network access by App Service Environment(ASE)</li>
+<li>High memory usage &amp; high scale(ASE)</li>
+</ul>
+</li>
+<li>Container Apps
+<ul>
+<li>fully managed environment hosted by Azure Container Apps</li>
+<li>package custom libraries</li>
+<li>migration code from on-premises or legacy to cloud native microservices</li>
+<li>avoid the overhead and complexity of managing Kubernetes clusters dedicated compute</li>
+<li>high-end processing power by dedicated CPU compute resources</li>
+</ul>
+</li>
+</ul>
+<h3 id="scale-azure-functions">Scale Azure Functions</h3>
+<ul>
+<li>
+<p>scaling behaviors of the various hosting plans
+| <strong>Plan</strong>               | <strong>Scale out</strong>                                                                                             | <strong>Max # instances</strong>                     |
+|------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| <strong>Consumption plan</strong>    | 이벤트 기반. 높은 부하가 있을 때에도 자동으로 확장됨. 트리거 이벤트 수에 따라 CPU 및 메모리 자원을 확장하며, 인스턴스를 추가함.   | Windows: 200<br>Linux: 100           |
+| <strong>Flex Consumption plan</strong>| 함수별 확장. 이벤트 기반 확장 결정이 함수별로 계산되어, 함수 확장 방식을 더 결정적으로 제공.                     | 주어진 지역 내 모든 인스턴스의 총 메모리 사용량에 의해 제한됨. |
+| <strong>Premium plan</strong>        | 이벤트 기반. 함수가 트리거되는 이벤트 수에 따라 자동으로 확장됨.                                        | Windows: 100<br>Linux: 20-100         |
+| <strong>Dedicated plan</strong>      | 수동/자동 확장                                                                                           | 10-30 (ASE: 100)                       |
+| <strong>Container Apps</strong>      | 이벤트 기반. 함수가 트리거되는 이벤트 수에 따라 Functions 호스트 인스턴스를 추가하여 자동으로 확장됨.                   | 10-300                                 |</p>
+</li>
+<li>
+<p>Consumption plan에서 Linux 앱은 시간당 구독당 500개의 인스턴스로 제한됩니다.</p>
+</li>
+<li>
+<p>Premium plan에서는 일부 지역에서 Linux 앱이 최대 100개 인스턴스로 확장될 수 있습니다.</p>
+</li>
+<li>
+<p>Container Apps에서는 사용할 수 있는 코어 수가 충분하면 최대 복제본 수를 설정할 수 있습니다.</p>
+</li>
+</ul>
+<h2 id="develop-azure-functions">Develop Azure Functions</h2>
+<h3 id="introduction-1">Introduction</h3>
+<ul>
+<li>Azure Functions : functions share a few core technical concepts and components</li>
+<li>concepts
+<ul>
+<li>key components of a function</li>
+<li>create triggers and bindings</li>
+<li>connect a function to services in Azure</li>
+<li>create a function by Visual Studio Code and Azure Functions Core Tools</li>
+</ul>
+</li>
+</ul>
+<h3 id="explore-azure-functions-development">Explore Azure Functions development</h3>
+<ul>
+<li>Explore Azure Functions development
+<ul>
+<li>function app share the same pricing plan, deployment method, and runtime version</li>
+</ul>
+</li>
+<li>Develop and test Azure Functions locally
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-local">Code and test Azure Functions locally</a></li>
+</ul>
+</li>
+<li>Local project files
+<ul>
+<li>host.json =&gt; affect all functions in a function app instance</li>
+<li>local.settings.json =&gt; Only your running project on local computer</li>
+</ul>
+</li>
+</ul>
+<h3 id="create-triggers-and-bindings">Create triggers and bindings</h3>
 
             
             
