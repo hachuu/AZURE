@@ -41,6 +41,7 @@
 ### Compare Functions and WebJobs
 - 차이
   - Azure Functions이 Azure App Service WebJobs보다 developer productivity를 제공함
+
 | **Factor**                                   | **Functions**                                                                                                           | **WebJobs with WebJobs SDK**                                                                                   |
 |---------------------------------------------|------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | **Serverless app model with automatic scaling** | Yes                                                                                                                    | No                                                                                                            |
@@ -78,6 +79,7 @@
 
 ### Scale Azure Functions
 - scaling behaviors of the various hosting plans
+
 | **Plan**               | **Scale out**                                                                                             | **Max # instances**                     |
 |------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------|
 | **Consumption plan**    | 이벤트 기반. 높은 부하가 있을 때에도 자동으로 확장됨. 트리거 이벤트 수에 따라 CPU 및 메모리 자원을 확장하며, 인스턴스를 추가함.   | Windows: 200<br>Linux: 100           |
@@ -113,3 +115,15 @@
   - local.settings.json => Only your running project on local computer
 
 ### Create triggers and bindings
+
+- trigger : Triggers have associated data, which is often provided as the payload of the function.
+- binding : way of declaratively connecting another resource to the function, be connected as input bindings, output bindings, or both. Data from bindings is provided to the function as parameters.
+
+### Binding direction
+- For triggers, the direction is always in
+- Input and output bindings use in and out
+- Some bindings support a special direction inout. If you use inout, only the Advanced editor is available via the Integrate tab in the portal.
+
+### Connect functions to Azure services
+- As a security best practice, Azure Functions takes advantage of the application settings functionality of Azure App Service to help you more securely store strings, keys, and other tokens required to connect to other services
+- environment variable name value pairs

@@ -196,17 +196,46 @@
 <ul>
 <li>차이
 <ul>
-<li>Azure Functions이 Azure App Service WebJobs보다 developer productivity를 제공함
-| <strong>Factor</strong>                                   | <strong>Functions</strong>                                                                                                           | <strong>WebJobs with WebJobs SDK</strong>                                                                                   |
-|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| <strong>Serverless app model with automatic scaling</strong> | Yes                                                                                                                    | No                                                                                                            |
-| <strong>Develop and test in browser</strong>             | Yes                                                                                                                    | No                                                                                                            |
-| <strong>Pay-per-use pricing</strong>                     | Yes                                                                                                                    | No                                                                                                            |
-| <strong>Integration with Logic Apps</strong>             | Yes                                                                                                                    | No                                                                                                            |
-| <strong>Trigger events</strong>                          | - Timer <br> - Azure Storage queues and blobs <br> - Azure Service Bus queues and topics <br> - Azure Cosmos DB <br> - Azure Event Hubs <br> - HTTP/WebHook (GitHub, Slack) <br> - Azure Event Grid | - Timer <br> - Azure Storage queues and blobs <br> - Azure Service Bus queues and topics <br> - Azure Cosmos DB <br> - Azure Event Hubs <br> - File system |</li>
+<li>Azure Functions이 Azure App Service WebJobs보다 developer productivity를 제공함</li>
 </ul>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th><strong>Factor</strong></th>
+<th><strong>Functions</strong></th>
+<th><strong>WebJobs with WebJobs SDK</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Serverless app model with automatic scaling</strong></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Develop and test in browser</strong></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Pay-per-use pricing</strong></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Integration with Logic Apps</strong></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Trigger events</strong></td>
+<td>- Timer <br> - Azure Storage queues and blobs <br> - Azure Service Bus queues and topics <br> - Azure Cosmos DB <br> - Azure Event Hubs <br> - HTTP/WebHook (GitHub, Slack) <br> - Azure Event Grid</td>
+<td>- Timer <br> - Azure Storage queues and blobs <br> - Azure Service Bus queues and topics <br> - Azure Cosmos DB <br> - Azure Event Hubs <br> - File system</td>
+</tr>
+</tbody>
+</table>
 <h3 id="hosting-options">hosting options</h3>
 <ul>
 <li>Consumption plan
@@ -251,25 +280,48 @@
 </ul>
 <h3 id="scale-azure-functions">Scale Azure Functions</h3>
 <ul>
-<li>
-<p>scaling behaviors of the various hosting plans
-| <strong>Plan</strong>               | <strong>Scale out</strong>                                                                                             | <strong>Max # instances</strong>                     |
-|------------------------|----------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| <strong>Consumption plan</strong>    | 이벤트 기반. 높은 부하가 있을 때에도 자동으로 확장됨. 트리거 이벤트 수에 따라 CPU 및 메모리 자원을 확장하며, 인스턴스를 추가함.   | Windows: 200<br>Linux: 100           |
-| <strong>Flex Consumption plan</strong>| 함수별 확장. 이벤트 기반 확장 결정이 함수별로 계산되어, 함수 확장 방식을 더 결정적으로 제공.                     | 주어진 지역 내 모든 인스턴스의 총 메모리 사용량에 의해 제한됨. |
-| <strong>Premium plan</strong>        | 이벤트 기반. 함수가 트리거되는 이벤트 수에 따라 자동으로 확장됨.                                        | Windows: 100<br>Linux: 20-100         |
-| <strong>Dedicated plan</strong>      | 수동/자동 확장                                                                                           | 10-30 (ASE: 100)                       |
-| <strong>Container Apps</strong>      | 이벤트 기반. 함수가 트리거되는 이벤트 수에 따라 Functions 호스트 인스턴스를 추가하여 자동으로 확장됨.                   | 10-300                                 |</p>
-</li>
-<li>
-<p>Consumption plan에서 Linux 앱은 시간당 구독당 500개의 인스턴스로 제한됩니다.</p>
-</li>
-<li>
-<p>Premium plan에서는 일부 지역에서 Linux 앱이 최대 100개 인스턴스로 확장될 수 있습니다.</p>
-</li>
-<li>
-<p>Container Apps에서는 사용할 수 있는 코어 수가 충분하면 최대 복제본 수를 설정할 수 있습니다.</p>
-</li>
+<li>scaling behaviors of the various hosting plans</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Plan</strong></th>
+<th><strong>Scale out</strong></th>
+<th><strong>Max # instances</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Consumption plan</strong></td>
+<td>이벤트 기반. 높은 부하가 있을 때에도 자동으로 확장됨. 트리거 이벤트 수에 따라 CPU 및 메모리 자원을 확장하며, 인스턴스를 추가함.</td>
+<td>Windows: 200<br>Linux: 100</td>
+</tr>
+<tr>
+<td><strong>Flex Consumption plan</strong></td>
+<td>함수별 확장. 이벤트 기반 확장 결정이 함수별로 계산되어, 함수 확장 방식을 더 결정적으로 제공.</td>
+<td>주어진 지역 내 모든 인스턴스의 총 메모리 사용량에 의해 제한됨.</td>
+</tr>
+<tr>
+<td><strong>Premium plan</strong></td>
+<td>이벤트 기반. 함수가 트리거되는 이벤트 수에 따라 자동으로 확장됨.</td>
+<td>Windows: 100<br>Linux: 20-100</td>
+</tr>
+<tr>
+<td><strong>Dedicated plan</strong></td>
+<td>수동/자동 확장</td>
+<td>10-30 (ASE: 100)</td>
+</tr>
+<tr>
+<td><strong>Container Apps</strong></td>
+<td>이벤트 기반. 함수가 트리거되는 이벤트 수에 따라 Functions 호스트 인스턴스를 추가하여 자동으로 확장됨.</td>
+<td>10-300</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Consumption plan에서 Linux 앱은 시간당 구독당 500개의 인스턴스로 제한됩니다.</li>
+<li>Premium plan에서는 일부 지역에서 Linux 앱이 최대 100개 인스턴스로 확장될 수 있습니다.</li>
+<li>Container Apps에서는 사용할 수 있는 코어 수가 충분하면 최대 복제본 수를 설정할 수 있습니다.</li>
 </ul>
 <h2 id="develop-azure-functions">Develop Azure Functions</h2>
 <h3 id="introduction-1">Introduction</h3>
@@ -304,6 +356,16 @@
 </li>
 </ul>
 <h3 id="create-triggers-and-bindings">Create triggers and bindings</h3>
+<ul>
+<li>trigger : Triggers have associated data, which is often provided as the payload of the function.</li>
+<li>binding : way of declaratively connecting another resource to the function, be connected as input bindings, output bindings, or both. Data from bindings is provided to the function as parameters.</li>
+</ul>
+<h3 id="binding-direction">Binding direction</h3>
+<ul>
+<li>For triggers, the direction is always in</li>
+<li>Input and output bindings use in and out</li>
+<li>Some bindings support a special direction inout. If you use inout, only the Advanced editor is available via the Integrate tab in the portal.</li>
+</ul>
 
             
             
